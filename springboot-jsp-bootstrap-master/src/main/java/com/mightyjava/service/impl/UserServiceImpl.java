@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
 				message = "Updated";
 			}
 			user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-			user.setRole(roleRepository.findById(user.getRoleId()).get());
+			user.setRole(roleRepository.findById(user.getRoleId()).orElse(null));
 			jsonObject.put("status", "success");
 			jsonObject.put("title", message+" Confirmation");
 			jsonObject.put("message", userRepository.save(user).getFullName()+" "+message+" successfully.");
